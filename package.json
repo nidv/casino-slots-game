@@ -1,0 +1,12 @@
+{
+  "name": "casino-slots-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Browser-based 3-reel slot game in plain HTML, CSS, and JavaScript",
+  "scripts": {
+    "dev": "http-server -a 127.0.0.1 -p 8000 ."
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

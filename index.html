@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lucky Sevens - Slot Game</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="cabinet">
+    <h1 class="title">LUCKY <span>SEVENS</span></h1>
+
+    <header class="status-bar">
+      <div class="status"><span class="label">Credits</span><span id="credits">100</span></div>
+      <div class="status"><span class="label">Bet</span><span id="bet">1</span></div>
+      <div class="status"><span class="label">Win</span><span id="win">0</span></div>
+    </header>
+
+    <section class="reels" aria-label="Slot reels">
+      <div class="reel-window"></div>
+      <div class="reel-window"></div>
+      <div class="reel-window"></div>
+      <div class="payline" aria-hidden="true"></div>
+    </section>
+
+    <p class="message" id="message" role="status">Press SPIN to play</p>
+
+    <div class="controls">
+      <button id="bet-button" type="button">BET</button>
+      <button id="max-bet-button" type="button">MAX BET</button>
+      <button id="spin-button" type="button" class="spin">SPIN</button>
+    </div>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
