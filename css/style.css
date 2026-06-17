@@ -1,3 +1,5 @@
+/* :root = ställe för globala variabler (färger och mått) som återanvänds överallt.
+   Ändrar man en färg här slår det igenom i hela spelet. */
 :root {
   /* One cell of the 3x3 reel window; sized so the cabinet fits portrait
      phones and landscape tablets without separate layouts. Fixed gaps,
@@ -11,10 +13,13 @@
   --red: #e8323c;
 }
 
+/* Gäller alla element: border-box gör att padding/border räknas in i bredden,
+   slipper man oväntade överraskningar när saker blir för breda */
 * {
   box-sizing: border-box;
 }
 
+/* Bakgrunden: en lila "spotlight"-gradient och allt centrerat mitt på skärmen */
 body {
   margin: 0;
   min-height: 100vh;
@@ -27,6 +32,8 @@ body {
   padding: 12px;
 }
 
+/* Själva automaten: lila låda med guldkant, rundade hörn och skugga så den
+   ser ut att sväva. Max 520px bred så den inte blir jättebred på datorn */
 .cabinet {
   width: min(100%, 520px);
   background: linear-gradient(180deg, #5d2090, #38105c);
@@ -39,6 +46,8 @@ body {
   justify-items: center;
 }
 
+/* Rubriken. clamp() gör texten responsiv: aldrig mindre än 1.4rem, aldrig
+   större än 2.2rem, annars 6% av skärmbredden. Guldfärg med skugga */
 .title {
   margin: 0;
   font-size: clamp(1.4rem, 6vw, 2.2rem);
@@ -47,11 +56,13 @@ body {
   text-shadow: 0 2px 0 var(--gold-dark), 0 4px 10px rgba(0, 0, 0, 0.6);
 }
 
+/* "SEVENS"-delen: röd text med tunn guldkontur runt bokstäverna */
 .title span {
   color: var(--red);
   -webkit-text-stroke: 1px var(--gold);
 }
 
+/* Topplisten: lägger de tre rutorna (Credits/Bet/Win) på rad och centrerar dem */
 .status-bar {
   display: flex;
   gap: 10px;
@@ -59,6 +70,7 @@ body {
   justify-content: center;
 }
 
+/* En enskild mätare i topplisten: mörk ruta med guldkant, etikett ovanför värdet */
 .status {
   background: rgba(0, 0, 0, 0.45);
   border: 2px solid var(--gold-dark);
@@ -69,6 +81,7 @@ body {
   display: grid;
 }
 
+/* Den lilla texten ("CREDITS" osv) ovanför siffran: liten, gles och versaler */
 .status .label {
   font-size: 0.65rem;
   letter-spacing: 0.1em;
@@ -76,11 +89,14 @@ body {
   color: var(--gold);
 }
 
+/* Själva siffran (sista span i rutan): större och fet så den syns tydligt */
 .status span:last-child {
   font-size: 1.2rem;
   font-weight: bold;
 }
 
+/* Guldramen runt hjulen. position: relative behövs för att den röda
+   paylinen ska kunna placeras absolut ovanpå */
 .reels {
   position: relative;
   display: flex;
@@ -91,6 +107,8 @@ body {
   box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
+/* Titthålet för ett hjul: exakt 3 celler högt. overflow: hidden klipper bort
+   allt utanför, så man bara ser tre symboler i taget medan resten döljs */
 .reel-window {
   width: var(--cell);
   height: calc(var(--cell) * 3);
@@ -99,10 +117,13 @@ body {
   border-radius: 8px;
 }
 
+/* Den långa remsan med alla symboler som glider upp/ner inuti titthålet.
+   will-change: transform tipsar webbläsaren att animera mjukt */
 .reel-strip {
   will-change: transform;
 }
 
+/* En ruta på remsan där en symbol bor, centrerad i mitten */
 .reel-cell {
   width: var(--cell);
   height: var(--cell);
@@ -110,11 +131,13 @@ body {
   place-items: center;
 }
 
+/* Själva symbolbilden får fylla 72% av rutan så det blir lite luft runt om */
 .reel-cell svg {
   width: 72%;
   height: 72%;
 }
 
+/* Den röda vinstlinjen som ligger ovanpå hjulen, mitt i bild */
 .payline {
   position: absolute;
   left: 4px;
@@ -127,17 +150,20 @@ body {
   pointer-events: none;
 }
 
+/* Läggs på de symboler som vann: en glödande puls 4 gånger så de "lyser upp" */
 .win-cell {
   animation: win-pulse 0.6s ease-in-out 4;
   background: radial-gradient(circle, rgba(245, 197, 66, 0.55) 0%, transparent 70%);
   border-radius: 8px;
 }
 
+/* Pulsen: zooma upp symbolen lite på mitten och tillbaka igen */
 @keyframes win-pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.18); }
 }
 
+/* Meddelanderaden. min-height gör att layouten inte hoppar när texten byts ut */
 .message {
   margin: 0;
   min-height: 1.5em;
@@ -146,22 +172,27 @@ body {
   letter-spacing: 0.05em;
 }
 
+/* Vinstvarianten av meddelandet: guldfärgad, fet och blinkar till */
 .message-win {
   color: var(--gold);
   font-weight: bold;
   animation: message-flash 0.5s ease-in-out 6;
 }
 
+/* Blinkningen: tonas ner till nästan genomskinligt på mitten */
 @keyframes message-flash {
   50% { opacity: 0.35; }
 }
 
+/* Knapp-raden längst ner, knapparna ligger på rad med lite mellanrum */
 .controls {
   display: flex;
   gap: 12px;
   align-items: center;
 }
 
+/* Grundutseendet för alla knappar. min-height/width 48px+ så de är lätta att
+   träffa med fingret på mobil */
 button {
   font-family: inherit;
   font-weight: bold;
@@ -178,6 +209,7 @@ button {
   transition: transform 0.1s ease, filter 0.1s ease;
 }
 
+/* SPIN-knappen sticker ut: orange/röd, större och med vit text */
 button.spin {
   background: linear-gradient(180deg, #ff8a3c, var(--red));
   color: #fff;
@@ -187,19 +219,23 @@ button.spin {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/* Lyser upp lite när man hovrar (men inte om knappen är avstängd) */
 button:hover:not(:disabled) {
   filter: brightness(1.15);
 }
 
+/* Krymper till för att kännas "intryckt" när man klickar */
 button:active:not(:disabled) {
   transform: scale(0.96);
 }
 
+/* Avstängd knapp (t.ex. medan hjulen snurrar): grå och "ej tillåten"-pekare */
 button:disabled {
   filter: grayscale(0.6) brightness(0.7);
   cursor: not-allowed;
 }
 
+/* Lite mer luft och större SPIN-knapp på större skärmar (surfplatta/dator) */
 @media (min-width: 700px) {
   .cabinet {
     gap: 20px;

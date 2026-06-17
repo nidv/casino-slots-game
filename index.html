@@ -7,15 +7,21 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- "cabinet" = hela spelautomaten, alltså lådan som allt sitter i -->
   <main class="cabinet">
+    <!-- Rubriken högst upp. "SEVENS" får egen span så den kan färgas separat -->
     <h1 class="title">LUCKY <span>SEVENS</span></h1>
 
+    <!-- Topplisten med siffrorna: hur mycket pengar, insats och senaste vinst.
+         Siffrorna har id:n så att JS:en kan byta ut dem live -->
     <header class="status-bar">
       <div class="status"><span class="label">Credits</span><span id="credits">100</span></div>
       <div class="status"><span class="label">Bet</span><span id="bet">1</span></div>
       <div class="status"><span class="label">Win</span><span id="win">0</span></div>
     </header>
 
+    <!-- Själva hjulen. De tre tomma rutorna fylls med symboler av JS:en.
+         "payline" är den röda linjen i mitten där vinsten avgörs -->
     <section class="reels" aria-label="Slot reels">
       <div class="reel-window"></div>
       <div class="reel-window"></div>
@@ -23,8 +29,10 @@
       <div class="payline" aria-hidden="true"></div>
     </section>
 
+    <!-- Textraden som visar meddelanden till spelaren ("Spinning...", "WIN!" osv) -->
     <p class="message" id="message" role="status">Press SPIN to play</p>
 
+    <!-- Knapparna längst ner: höj insats, max insats och snurra -->
     <div class="controls">
       <button id="bet-button" type="button">BET</button>
       <button id="max-bet-button" type="button">MAX BET</button>
@@ -32,6 +40,7 @@
     </div>
   </main>
 
+  <!-- type="module" gör att vi kan använda import/export mellan JS-filerna -->
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

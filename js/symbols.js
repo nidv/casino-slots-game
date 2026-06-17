@@ -2,6 +2,8 @@
 // The markup is static and author-controlled; it is parsed once per node
 // via DOMParser rather than injected as raw HTML.
 
+// Här ligger ritningen (SVG-kod) för varje symbol, en per nyckel. Allt ritas
+// alltså i kod istället för att ladda in bildfiler.
 const SYMBOL_SVGS = {
   cherry: `<svg viewBox="0 0 64 64" aria-label="cherry"><path d="M32 8 C26 20 18 26 16 36" fill="none" stroke="#3e7d2f" stroke-width="4" stroke-linecap="round"/><path d="M32 8 C40 18 46 24 46 34" fill="none" stroke="#3e7d2f" stroke-width="4" stroke-linecap="round"/><circle cx="16" cy="45" r="11" fill="#d2222a"/><circle cx="46" cy="43" r="11" fill="#e8323c"/><circle cx="12" cy="41" r="3" fill="#f4757c"/><circle cx="42" cy="39" r="3" fill="#f4757c"/></svg>`,
   lemon: `<svg viewBox="0 0 64 64" aria-label="lemon"><ellipse cx="32" cy="36" rx="21" ry="14" fill="#f7d117" transform="rotate(-20 32 36)"/><circle cx="48" cy="21" r="4" fill="#e3b800"/><ellipse cx="26" cy="32" rx="6" ry="3" fill="#fbe98a" transform="rotate(-20 26 32)"/></svg>`,
@@ -16,8 +18,12 @@ const SYMBOL_SVGS = {
 const parser = new DOMParser();
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
+// Tar ett symbolnamn (t.ex. "cherry") och ger tillbaka ett färdigt SVG-element
+// som man kan stoppa in på sidan.
 export function symbolNode(symbol) {
   // XML parsing needs the namespace declared or the result is not real SVG.
+  // Vi smyger in xmlns-attributet så att webbläsaren förstår att det är en SVG.
   const markup = SYMBOL_SVGS[symbol].replace('<svg ', `<svg xmlns="${SVG_NS}" `);
+  // Tolkar texten till riktig SVG och returnerar själva elementet.
   return parser.parseFromString(markup, 'image/svg+xml').documentElement;
 }
