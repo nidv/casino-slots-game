@@ -44,7 +44,6 @@ async function handleSpin() {
   for (const reel of reels) reel.clearWin();
 
   const stops = spin(); // lotta fram var hjulen ska stanna
-  // Later reels travel further and longer, so they stop left to right.
   // Varje hjul snurrar lite längre än det förra, så de stannar i tur och ordning.
   await Promise.all(
     reels.map((reel, i) => reel.spinTo(stops[i], { loops: 2 + i, duration: 1100 + i * 350 })),

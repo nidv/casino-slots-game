@@ -1,6 +1,6 @@
-// Ett hjul: äger sin egen DOM-remsa och snurr/stopp-animationen.
-// Positionen hålls i cellenheter (decimaltal) och räknas om till pixlar först
-// när den ritas, så att fönsterändringar aldrig ställer till det för hjulet.
+// One reel: owns its DOM strip and the spin/stop animation.
+// Position is tracked in cell units (floats) and converted to pixels at
+// render time, so window resizes never corrupt the reel state.
 
 import { symbolNode } from './symbols.js';
 
